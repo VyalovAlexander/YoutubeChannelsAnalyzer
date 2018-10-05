@@ -1,0 +1,9 @@
+{
+    "require": {
+        "mnapoli/silly": "^1.7",
+        "vdb/php-spider": "^0.3.0",
+        "php-di/php-di": "^6.0",
+        "fzaninotto/faker": "^1.8",
+        "mongodb/mongodb": "^1.4"
+    }
+}

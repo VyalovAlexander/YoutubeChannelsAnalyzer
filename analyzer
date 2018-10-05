@@ -1,0 +1,15 @@
+#! /usr/bin/env php
+<?php
+$container = require  __DIR__  . DIRECTORY_SEPARATOR . 'bootstrap.php';
+use Symfony\Component\Console\Output\OutputInterface;
+
+
+$app = new Silly\Application();
+$app->useContainer($container, true, true);
+$app->command('fill', function (Faker\Generator $faker, MongoDB\Client $mongo, OutputInterface $output) {
+    $collection = $mongo->test->users;
+    $insertOneResult = $collection->insertOne(['_id' => 1, 'name' => 'Alice']);
+    $output->write($insertOneResult->getInsertedId());
+
+})->descriptions('fill mongodb');
+$app->run();

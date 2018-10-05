@@ -1,0 +1,29 @@
+version: '2'
+services:
+  php:
+    build:
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+    container_name: php
+    links:
+      - mongodb
+    volumes:
+      - .:/var/www
+      - ./docker/php/logs:/var/log
+    command: sh /docker-command.sh
+  mongodb:
+    build:
+          context: ./
+          dockerfile: ./docker/mongo/Dockerfile
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data
+      - MONGO_LOG_DIR=/logs
+    volumes:
+      - ./docker/mongo/data:/data
+      - ./docker/mongo/logs:/logs
+    ports:
+        - 27018:27017
+    command: sh /docker-command.sh
+
+
